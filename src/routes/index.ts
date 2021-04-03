@@ -7,6 +7,10 @@ import saveTokensMiddleware from '../middlewares/saveTokens';
 
 const routes = Router();
 
+routes.get('/',(request,response)=>{
+  response.json({status:'working'})
+})
+
 routes.use('/authorization',authorizationRoutes);
 //routes.use(saveTokensMiddleware);
 routes.get('/currentPlayingTrack',async (request,response)=>{
