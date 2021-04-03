@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "npm ts-node"
+    "start": "npx ts-node"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
