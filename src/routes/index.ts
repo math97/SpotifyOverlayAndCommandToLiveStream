@@ -14,10 +14,9 @@ routes.get('/currentPlayingTrack',async (request,response)=>{
   const {accessToken} =  request.query;
 
   const getCurrentPlayingTrackService = new GetCurrentPlayingTrackService();
-  
+
   try {
     const data = await getCurrentPlayingTrackService.execute(accessToken as string); 
-
     return response.json(data);
   } catch (error) {
     console.log(error);

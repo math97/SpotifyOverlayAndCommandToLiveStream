@@ -19,7 +19,7 @@ routes.get('/',async (request,response)=>{
   '?response_type=code'+
   '&client_id='+clientId+
   '&scope='+encodeURIComponent(scopePlayingCurrengSong)+
-  '&redirect_uri='+encodeURIComponent('https://622a7f0cb641.ngrok.io/authorization/token'))
+  '&redirect_uri='+encodeURIComponent('https://spotifyaddons.herokuapp.com/authorization/token'))
 
 });
 routes.get('/token',async (request,response)=>{
@@ -29,7 +29,7 @@ routes.get('/token',async (request,response)=>{
   const authorizedCode  = await request.query.code
 
   try {
-    const {access_token,refresh_token,token_type,expires_in} = await getTokenService.execute(authorizedCode as string,'https://622a7f0cb641.ngrok.io/authorization/token');
+    const {access_token,refresh_token,token_type,expires_in} = await getTokenService.execute(authorizedCode as string,'https://spotifyaddons.herokuapp.com/authorization/token');
 
     request.token = {accessToken:access_token,refreshToken:refresh_token}  
       
