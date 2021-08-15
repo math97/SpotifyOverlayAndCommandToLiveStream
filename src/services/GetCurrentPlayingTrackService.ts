@@ -1,4 +1,5 @@
 import axios from "axios";
+import AppError from "../AppError";
 
 interface artistData{
     name: string;
@@ -16,6 +17,8 @@ class GetCurrentPlayingTrack {
         market:'BR'
       }
       });
+
+      if(!dataResponseSpotify.data || dataResponseSpotify.data === null || dataResponseSpotify.data.lenght === 0) return {message:"User is not listening to any music"};
       
       const {name, artists} = dataResponseSpotify.data.item;
       
@@ -26,8 +29,7 @@ class GetCurrentPlayingTrack {
       return `${name} - by:${artistResponse}`;  
       
     } catch (error) {
-      console.log(error);
-    }
+      throw new AppError(error.message,error.code);    }
   }
 }
 

@@ -14,21 +14,18 @@ routes.get('/',(request,response)=>{
 
 routes.use('/authorization',authorizationRoutes);
 //routes.use(saveTokensMiddleware);
-routes.get('/currentPlayingTrack',async (request,response)=>{
-  
-  const {accessToken} =  request.query;
-
-  if(!accessToken || accessToken === undefined) throw new AppError('User not authenticated.Send the correct token',401);
-
-  const getCurrentPlayingTrackService = new GetCurrentPlayingTrackService();
-
+routes.get('/currentPlayingTrack',async (request,response)=>{  
   try {
+    const {accessToken} =  request.query;
+    
+    if(!accessToken || accessToken === undefined) throw new AppError('User not authenticated.Send the correct token',401);
+  
+    const getCurrentPlayingTrackService = new GetCurrentPlayingTrackService();
     const data = await getCurrentPlayingTrackService.execute(accessToken as string); 
-    if(data === null || undefined) response.json({Message:"User is not listening to any music"});
 
     return response.json(data);
   } catch (error) {
-    console.log(error);
+    if(error.statusCode === 401) return response.json({Error:"Token not sent or invalid"});
     throw new AppError(error.message,error.urlCode);
   }
 });
