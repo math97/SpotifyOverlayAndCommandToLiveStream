@@ -40,7 +40,7 @@ routes.get('/currentPlaylist',async (request,response)=>{
     const getCurrentPlayingTrackService = new GetCurrentPlaylist();
     const data = await getCurrentPlayingTrackService.execute(accessToken as string); 
 
-    return response.json(data);
+    return response.json(` ${data} `)
   } catch (error) {
     if(error.statusCode === 401) return response.json({Error:"Token not sent or invalid"});
     throw new AppError(error.message,error.urlCode);
