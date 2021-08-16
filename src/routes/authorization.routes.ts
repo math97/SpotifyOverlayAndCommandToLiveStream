@@ -15,13 +15,13 @@ const routes = Router();
 
 routes.get('/',async (request,response)=>{
   try {
-    
-    const {scopePlayingCurrengSong,clientId,urlCode } = authConfig
+        
+    const {scopePlayingCurrentSong,clientId,urlCode } = authConfig
    
     response.redirect( urlCode +
     '?response_type=code'+
     '&client_id='+clientId+
-    '&scope='+encodeURIComponent(scopePlayingCurrengSong)+
+    '&scope='+encodeURIComponent(scopePlayingCurrentSong)+
     '&redirect_uri='+encodeURIComponent(`${process.env.APP_URL}authorization/token`))
   } catch (error) {
     throw new AppError(error.message,error.code);
