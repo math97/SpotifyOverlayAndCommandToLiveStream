@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "npm install typescript && npx tsc",
-    "start": "npm run build && node dist/server.js"
+    "start": "npm run build && node server.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
