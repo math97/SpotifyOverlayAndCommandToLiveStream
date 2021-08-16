@@ -18,9 +18,7 @@ musicRoutes.get('/',async (request,response)=>{
     
 
     return response.json(data);
-  } catch (error) {
-    console.log(error);
-    
+  } catch (error) {    
     if(error.statusCode === 401) return response.json({Error:"Token not sent or invalid"});
     throw new AppError(error.message,error.urlCode);
   }

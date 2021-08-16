@@ -15,7 +15,7 @@ export default class MusicController {
       console.log(dataResponseSpotify,'data --------');
       
   
-      const {name, artists} = dataResponseSpotify;
+      const {name, artists} = dataResponseSpotify.item;
       
       const artistResponse = artists.map((artist:artistData)=>{
         return artist.name;
@@ -23,9 +23,7 @@ export default class MusicController {
 
       return `${name} - by:${artistResponse}`;  
       
-    } catch (error) {
-      console.log(error,'controller');
-      
+    } catch (error) {      
       throw new AppError(error.message,error.code);    
     }
   }
