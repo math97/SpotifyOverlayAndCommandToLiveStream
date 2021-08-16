@@ -14,11 +14,15 @@ export default class PlaylistController {
   
       const context = dataResponseSpotify.data.context;
 
+      console.log(context,'-----context');
+    
       if(context === null) return 'this song doesn\'t belong to any playlist';
 
       return context.external_urls.spotify;
       
     } catch (error) {
+      console.log(error,'----------- controller');
+      
       throw new AppError(error.message,error.code);    
     }
   }
