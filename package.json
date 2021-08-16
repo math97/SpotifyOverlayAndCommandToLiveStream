@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
+  "engines": {
+    "yarn":"1.22.10"
+  },
   "scripts": {
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "yarn build && node dist/server.js"
   },
   "devDependencies": {
