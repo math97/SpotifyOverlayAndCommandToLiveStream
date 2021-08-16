@@ -29,6 +29,7 @@ class GetCurrentPlayingTrack {
       return `${name} - by:${artistResponse}`;  
       
     } catch (error) {
+      console.log(error);
       throw new AppError(error.message,error.code);    }
   }
 }

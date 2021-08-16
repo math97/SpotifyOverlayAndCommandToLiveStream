@@ -21,6 +21,7 @@ class GetCurrentPlaylist {
       return data.context.external_urls.spotify?data.context.external_urls.spotify : 'this song doesn\'t belong to any playlist';
 
     } catch (error) {
+      console.log(error);
       throw new AppError(error.message,error.code); 
     }
   }
