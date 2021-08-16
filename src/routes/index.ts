@@ -39,8 +39,6 @@ routes.get('/currentPlaylist',async (request,response)=>{
   
     const getCurrentPlayingTrackService = new GetCurrentPlaylist();
     const data = await getCurrentPlayingTrackService.execute(accessToken as string); 
-
-    console.log(JSON.stringify(data));
     
     return response.json(` ${data} `)
   } catch (error) {

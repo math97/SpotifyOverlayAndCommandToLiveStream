@@ -23,7 +23,6 @@ class GetCurrentPlaylist {
       return data.external_urls.spotify;
 
     } catch (error) {
-      console.log(error);
       throw new AppError(error.message,error.code); 
     }
   }
