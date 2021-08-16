@@ -16,11 +16,11 @@ class GetCurrentPlaylist {
 
       if(!dataResponseSpotify.data || dataResponseSpotify.data === null || dataResponseSpotify.data.lenght === 0) return "User is not listening to any music";
 
-      const data = dataResponseSpotify.data;
+      const data = dataResponseSpotify.data.context;
 
-      console.log(data);
-          
-      return data.context.external_urls.spotify?data.context.external_urls.spotify : 'this song doesn\'t belong to any playlist';
+      if(data === null) return 'this song doesn\'t belong to any playlist';
+
+      return data.external_urls.spotify;
 
     } catch (error) {
       console.log(error);
