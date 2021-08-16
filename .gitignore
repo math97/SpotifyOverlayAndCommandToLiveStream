@@ -4,6 +4,8 @@ yarn.lock
 .idea/
 .vscode/
 build/
+dist/*
+dist/
 temp/
 tmp/*
 !tmp/.gitkeep
