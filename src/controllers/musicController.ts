@@ -21,6 +21,8 @@ export default class MusicController {
       return `${name} - by:${artistResponse}`;  
       
     } catch (error) {
+      console.log(error,'controller');
+      
       throw new AppError(error.message,error.code);    
     }
   }
