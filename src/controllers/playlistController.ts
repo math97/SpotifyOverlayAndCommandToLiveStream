@@ -12,7 +12,7 @@ export default class PlaylistController {
       const getCurrentPlayingTrackService = new GetCurrentPlayingTrackService();
       const dataResponseSpotify = await getCurrentPlayingTrackService.execute(accessToken as string); 
   
-      const context = dataResponseSpotify.data.context;
+      const context = dataResponseSpotify.context;
 
       console.log(context,'-----context');
     

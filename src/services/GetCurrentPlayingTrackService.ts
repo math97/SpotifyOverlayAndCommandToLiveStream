@@ -17,8 +17,6 @@ class GetCurrentPlayingTrack {
       
       return dataResponseSpotify.data;      
     } catch (error) {      
-      console.log(error,'----------- service');
-
       throw new AppError(error.message,error.code);    
     }
   }
