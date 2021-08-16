@@ -14,12 +14,12 @@ class GetCurrentPlaylist {
       }
       });
 
-      if(!dataResponseSpotify.data || dataResponseSpotify.data === null || dataResponseSpotify.data.lenght === 0) return {message:"User is not listening to any music"};
+      if(!dataResponseSpotify.data || dataResponseSpotify.data === null || dataResponseSpotify.data.lenght === 0) return "User is not listening to any music";
 
       const data = dataResponseSpotify.data;
             
       return data.context.external_urls.spotify?data.context.external_urls.spotify : 'this song doesn\'t belong to any playlist';
-      
+
     } catch (error) {
       throw new AppError(error.message,error.code); 
     }
