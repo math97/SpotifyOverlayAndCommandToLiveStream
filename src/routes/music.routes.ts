@@ -8,7 +8,6 @@ const musicRoutes = Router();
 musicRoutes.get('/',async (request,response)=>{  
   try {
     const {accessToken} =  request.query;
-    console.log(accessToken);
     
     if(!accessToken || accessToken === undefined) throw new AppError('User not authenticated.Send the correct token',401);
   

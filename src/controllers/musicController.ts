@@ -10,9 +10,12 @@ export default class MusicController {
     try {
 
       const getCurrentPlayingTrackService = new GetCurrentPlayingTrackService();
-      const data = await getCurrentPlayingTrackService.execute(accessToken as string); 
+      const dataResponseSpotify = await getCurrentPlayingTrackService.execute(accessToken as string); 
+
+      console.log(dataResponseSpotify,'data --------');
+      
   
-      const {name, artists} = data;
+      const {name, artists} = dataResponseSpotify;
       
       const artistResponse = artists.map((artist:artistData)=>{
         return artist.name;

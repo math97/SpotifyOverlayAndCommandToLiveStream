@@ -16,9 +16,7 @@ class GetCurrentPlayingTrack {
       if(!dataResponseSpotify.data || dataResponseSpotify.data === null || dataResponseSpotify.data.lenght === 0) return {message:"User is not listening to any music"};
       
       return dataResponseSpotify.data;      
-    } catch (error) {
-      console.log(error,'service');
-      
+    } catch (error) {      
       throw new AppError(error.message,error.code);    
     }
   }
