@@ -6,8 +6,6 @@ import AppError from './AppError';
 
 const app = express();
 
-const port = 8080
-
 app.use(express.json());
 app.use(cors());
 app.use(routes);
@@ -26,6 +24,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 
 });
 
-app.listen(port,()=>{
-  console.log(`server starts on port ${port}`);
+app.listen(process.env.PORT,()=>{
+  console.log(`server starts on port ${process.env.PORT}`);
 });
