@@ -1,5 +1,5 @@
 import { Router,Request,Response } from 'express';
-import axios, { AxiosRequestConfig } from 'axios';
+import { sign } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
@@ -36,8 +36,16 @@ routes.get('/token',async (request,response)=>{
     const {access_token,refresh_token,token_type,expires_in} = await getTokenService.execute(authorizedCode as string,`${process.env.APP_URL}authorization/token`);
 
     request.token = {accessToken:access_token,refreshToken:refresh_token}  
+
+    const token = sign(
+      {refresh:refresh_token },
+      authConfig.jwt.secret as string, {
+      subject:access_token,
+      expiresIn: authConfig.jwt.expiresIn,
+    });
+
       
-    return response.json({access_token,refresh_token,token_type,expires_in});
+    return response.json({token});
   } catch (error) {
     throw new AppError(error.message,error.code);
   }  
