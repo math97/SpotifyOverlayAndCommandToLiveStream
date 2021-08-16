@@ -1,12 +1,12 @@
 {
   "name": "spotifyOverlayBackend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "start": "npm run build && node dist/server.js"
+    "start": "yarn build && node dist/server.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
