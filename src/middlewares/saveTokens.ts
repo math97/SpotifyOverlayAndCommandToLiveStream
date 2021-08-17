@@ -1,15 +1,32 @@
-import {Request,Response,NextFunction } from 'express';
-
-interface express{
-  request: Request,
-  response:Response,
-  next:NextFunction,
+import { NextFunction, Request, Response } from 'express';
+import { verify } from 'jsonwebtoken';
+import authConfig from '../config/auth';
+import AppError from '../AppError';
+interface TokenPayload {
+  exp: number,
+  sub: string,
+  refresh:string,
 }
 
-export default function saveTokens({request,response,next}:express):void{
-  console.log(request);
-  //Was a middleware to take the tokens and using in request.
-  //After developing the front end I will create some cookie and retrieve the data here
-  next();
+export default function saveToken(request:Request,response:Response,next:NextFunction):void{
+  const authHeader = request.headers.authorization;
   
+  if (!authHeader) throw new AppError('JWT token is missing', 401);
+
+  const [, token] = authHeader.split(' ');
+  try {
+    const decoded = verify(token, authConfig.jwt.secret as string)
+
+    const { sub,refresh } = decoded as TokenPayload;
+
+    request.token.accessToken = sub;
+    request.token.refreshToken = refresh;
+
+    return next();
+
+  } catch {
+    throw new AppError('Invalid JWT token', 401);
+  }
+
+
 }

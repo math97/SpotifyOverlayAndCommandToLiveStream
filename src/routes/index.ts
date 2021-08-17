@@ -4,7 +4,7 @@ import authorizationRoutes from './authorization.routes';
 import musicRoutes from './music.routes';
 import playlistRoutes from './playlist.routes';
 
-import saveTokensMiddleware from '../middlewares/saveTokens';
+import saveToken from '../middlewares/saveTokens';
 
 const routes = Router();
 
@@ -13,9 +13,9 @@ routes.get('/',(request,response)=>{
 })
 
 routes.use('/authorization',authorizationRoutes);
+routes.use(saveToken);
 routes.use('/currentPlayingTrack',musicRoutes);
 routes.use('/currentPlaylist',playlistRoutes);
-//routes.use(saveTokensMiddleware);
 
 
 export default routes;
