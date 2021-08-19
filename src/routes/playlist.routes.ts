@@ -14,7 +14,7 @@ playlistRoutes.get('/',async (request,response)=>{
     const playlistController = new PlaylistController();
     const data = await playlistController.getCurrentPlaylist(accessToken as string); 
     
-    return response.json(` ${data} `)
+    return response.status(200).send(data);
   } catch (error) {
     if(error.statusCode === 401) return response.json({Error:"Token not sent or invalid"});
     throw new AppError(error.message,error.urlCode);
