@@ -3,6 +3,7 @@ import { Request, Response, Router } from 'express';
 import authorizationRoutes from './authorization.routes';
 import musicRoutes from './music.routes';
 import playlistRoutes from './playlist.routes';
+import userRoutes from './user.routes';
 
 import saveTokensMiddleware from '../middlewares/saveTokens';
 
@@ -15,6 +16,7 @@ routes.get('/',(request,response)=>{
 routes.use('/authorization',authorizationRoutes);
 routes.use('/currentPlayingTrack',musicRoutes);
 routes.use('/currentPlaylist',playlistRoutes);
+routes.use('/user',userRoutes);
 //routes.use(saveTokensMiddleware);
 
 
