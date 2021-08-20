@@ -1,5 +1,6 @@
 import express,{NextFunction,Response,Request} from 'express';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 import routes from './routes/index';
 import AppError from './AppError';
@@ -22,6 +23,14 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     message: 'Internal server error',
   })
 
+});
+
+  
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected to database');
 });
 
 app.listen(process.env.PORT,()=>{

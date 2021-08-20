@@ -1,7 +1,7 @@
 import { request, Router } from "express";
-import { getMongoManager } from "typeorm";
-import User from "../entities/User";
+import mongoose,{ model } from 'mongoose';
 
+import UserSchema from '../schema/User.schema';
 
 const userRoutes = Router();
 
@@ -13,18 +13,19 @@ interface UserData{
 }
 
 userRoutes.post('/', async (request,response)=>{
-  console.log('chegou');
-
-  const {email,password,accessToken,refreshToken}:UserData = request.body;
-
-  const id = "teste"
-
-  const user =  new User(email,password,accessToken,refreshToken);
-
-  const manager = getMongoManager();
-  await manager.save(user);
-
-  response.json({user});
+  try {  
+    const {email,password,accessToken,refreshToken}:UserData = request.body;
+      const userModel = model('User',UserSchema);
+    
+      const user = new userModel({email,password,accessToken,refreshToken});
+          
+      await user.save()
+    
+      response.json({user});
+    
+  } catch (error) {
+    console.log(error); 
+  }
   
 })
 
