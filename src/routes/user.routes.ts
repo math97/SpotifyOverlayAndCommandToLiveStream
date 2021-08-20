@@ -26,8 +26,20 @@ userRoutes.post('/', async (request,response)=>{
   } catch (error) {
     console.log(error); 
   }
-  
-})
+});
 
+userRoutes.get('/', async (request,response)=>{
+  try {  
+    const {id} = request.body;
+
+    const userModel = model('User',UserSchema);
+    const user = userModel.findById(id);
+
+    return response.json({user});
+    
+  } catch (error) {
+    console.log(error); 
+  }
+});
 
 export default userRoutes;
