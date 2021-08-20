@@ -1,7 +1,7 @@
 import { request, Router } from "express";
 import mongoose,{ model } from 'mongoose';
 
-import UserSchema from '../schema/User.schema';
+import UserController from '../controllers/userController';
 
 const userRoutes = Router();
 
@@ -13,19 +13,13 @@ interface UserData{
 }
 
 userRoutes.post('/', async (request,response)=>{
-  try {  
-    const {email,password,accessToken,refreshToken}:UserData = request.body;
-      const userModel = model('User',UserSchema);
+
+  const {saveUser} = new UserController();
+  
+  const {email,password,accessToken,refreshToken}:UserData = request.body;
+  const user = await saveUser({email,password,accessToken,refreshToken})
     
-      const user = new userModel({email,password,accessToken,refreshToken});
-          
-      await user.save()
-    
-      response.json({user});
-    
-  } catch (error) {
-    console.log(error); 
-  }
+  return response.json(user);
 });
 
 userRoutes.get('/', async (request,response)=>{
@@ -33,7 +27,7 @@ userRoutes.get('/', async (request,response)=>{
     const {id} = request.body;
 
     const userModel = model('User',UserSchema);
-    const user = userModel.findById(id);
+    const user = await userModel.findById(id);
 
     return response.json({user});
     
