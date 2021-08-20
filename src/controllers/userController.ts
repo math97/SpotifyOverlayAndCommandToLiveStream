@@ -25,4 +25,13 @@ export default class UserController {
       throw new AppError(error.message,error.code);    
     }
   }
+
+  public async getUser(id:String){
+    try {
+      const userModel = model('User',UserSchema);
+      return await userModel.findById(id);
+    } catch (error) {      
+      throw new AppError(error.message,error.code);    
+    }
+  }
 }

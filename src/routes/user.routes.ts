@@ -1,5 +1,5 @@
 import { request, Router } from "express";
-import mongoose,{ model } from 'mongoose';
+import AppError from "../AppError";
 
 import UserController from '../controllers/userController';
 
@@ -11,11 +11,11 @@ interface UserData{
   accessToken: string,
   refreshToken: string,
 }
+const {saveUser,getUser} = new UserController();
+
 
 userRoutes.post('/', async (request,response)=>{
 
-  const {saveUser} = new UserController();
-  
   const {email,password,accessToken,refreshToken}:UserData = request.body;
   const user = await saveUser({email,password,accessToken,refreshToken})
     
@@ -23,15 +23,14 @@ userRoutes.post('/', async (request,response)=>{
 });
 
 userRoutes.get('/', async (request,response)=>{
-  try {  
-    const {id} = request.body;
-
-    const userModel = model('User',UserSchema);
-    const user = await userModel.findById(id);
-
-    return response.json({user});
+  try {
+    const id = request.query.id;
     
+    if(!id) throw new AppError('Id invalid',400)
+    const user = await getUser(id as string);
+    return response.json(user);
   } catch (error) {
+    if(error.statusCode ===400) return response.status(400).json(error.message);
     console.log(error); 
   }
 });
