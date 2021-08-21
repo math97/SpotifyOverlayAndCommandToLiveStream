@@ -17,8 +17,8 @@ export default class UserController {
       const user = new userModel({
         email:userData.email,
         password:userData.password,
-        accessToken:userData.accessToken,
-        refreshToken:userData.refreshToken
+        accessToken:null,
+        refreshToken:null,
       });
       return await user.save()
     } catch (error) {      
