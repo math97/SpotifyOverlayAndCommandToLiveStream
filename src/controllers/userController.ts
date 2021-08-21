@@ -13,7 +13,7 @@ interface UserData{
 export default class UserController { 
   public async saveUser(userData:UserData){
     try {
-      const userModel = model('User',UserSchema);
+      const userModel = model('Users',UserSchema);
       const user = new userModel({
         email:userData.email,
         password:userData.password,
