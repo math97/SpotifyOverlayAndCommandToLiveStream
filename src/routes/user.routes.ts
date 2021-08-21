@@ -15,11 +15,13 @@ const {saveUser,getUser} = new UserController();
 
 
 userRoutes.post('/', async (request,response)=>{
-
-  const {email,password,accessToken,refreshToken}:UserData = request.body;
+try{  const {email,password,accessToken,refreshToken}:UserData = request.body;
   const user = await saveUser({email,password,accessToken,refreshToken})
     
   return response.json(user);
+}catch(e){
+  console.log(e);
+}
 });
 
 userRoutes.get('/', async (request,response)=>{
