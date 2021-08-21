@@ -1,4 +1,4 @@
-import mongoose,{ model } from 'mongoose';
+import { model } from 'mongoose';
 
 import AppError from "../AppError";
 import UserSchema from '../schema/User.schema';
@@ -13,7 +13,7 @@ interface UserData{
 export default class UserController { 
   public async saveUser(userData:UserData){
     try {
-      const userModel = model('Users',UserSchema);
+      const userModel = model('User',UserSchema);
       const user = new userModel({
         email:userData.email,
         password:userData.password,
